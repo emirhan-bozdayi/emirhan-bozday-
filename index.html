@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Bozdayı Bilişim | Destek & Forum</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        :root { --p: #2563eb; --bg: #f8fafc; --card: #ffffff; }
+        body { font-family: sans-serif; background: var(--bg); color: #1e293b; margin: 0; }
+        .nav { background: var(--card); padding: 1rem; display: flex; justify-content: space-between; border-bottom: 1px solid #e2e8f0; }
+        .container { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+        .card { background: var(--card); padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 1rem; }
+        input, textarea, select { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
+        .btn { background: var(--p); color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div style="font-weight: bold; font-size: 1.2rem;">Bozdayı Bilişim</div>
+        <div id="authLinks">
+            <button class="btn" onclick="showAuth()">Giriş Yap / Kayıt Ol</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Giriş/Kayıt Formu -->
+        <div id="authSection" class="card hidden">
+            <h3 id="authTitle">Giriş Yap</h3>
+            <input type="email" id="email" placeholder="E-posta">
+            <input type="password" id="password" placeholder="Şifre">
+            <button class="btn" onclick="handleAuth()">Devam Et</button>
+            <p onclick="toggleAuthMode()" style="cursor:pointer; font-size: 0.8rem; margin-top: 10px; color: blue;">Hesabın yok mu? Kayıt ol.</p>
+        </div>
+
+        <!-- Gönderi Oluşturma -->
+        <div id="postSection" class="card hidden">
+            <h3>Yeni Konu / Destek Talebi</h3>
+            <input type="text" id="title" placeholder="Başlık">
+            <select id="type">
+                <option value="forum">Forumda Paylaş (Herkes Görür)</option>
+                <option value="support">Destek Talebi (Sadece Admin Görür)</option>
+            </select>
+            <textarea id="content" rows="4" placeholder="Mesajınız..."></textarea>
+            <button class="btn" onclick="createPost()">Gönder</button>
+        </div>
+
+        <!-- Listeleme -->
+        <div id="feed">
+            <h3>Son Konular</h3>
+            <div id="postList"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
